@@ -99,37 +99,3 @@ void backRGB(int height, int width, double **H, double**S, double**V, unsigned c
         }
     }
 }
-
-int main(){
-     
-    char fileName[100] = "./images/lena_2.bmp";
-    //printf("Enter the file location: "); scanf("%s", fileName);
-    Image image = ReadImage(fileName);
-    
-    int h = image.height;
-    int w =image.width;
-    unsigned char imageA[h][w][3];
-    pixToArray(image.pixels, h, w, imageA, NULL);
-    double **imageH = (double **)malloc(h * sizeof(double *)); 
-    for (int i=0; i<h; i++) 
-         imageH[i] = (double *)malloc(w * sizeof(double));
-    double **imageS = (double **)malloc(h * sizeof(double *)); 
-    for (int i=0; i<h; i++) 
-         imageS[i] = (double *)malloc(w * sizeof(double));
-    double **imageV = (double **)malloc(h * sizeof(double *)); 
-    for (int i=0; i<h; i++) 
-         imageV[i] = (double *)malloc(w * sizeof(double)); 
-  
-    
-    convHSV(h, w, imageA, imageH, imageS, imageV);
-    
-    backRGB(h, w, imageH, imageS, imageV, imageA);
-    arrayToPix(image.pixels, h, w, imageA);
-    
-    WriteImage("./images/lenahsv_rgb.bmp", image);
-    
-    free(imageH);
-    free(imageS);
-    free(imageV);
-    return 0;
-}

@@ -8,7 +8,7 @@ void generateGaussFilter(int kHeight, int kWidth, double gk[kHeight][kWidth]){
     double r, s = 2.0 * stdv * stdv;  // Assigning standard deviation 
     double sum = 0.0;   // Initialization of sum for normalization
     int hVal = kHeight/2, wVal = kWidth/2;
-    for (int x = -hVal; x <= hVal; x++) // Loop to generate 5x5 kernel
+    for (int x = -hVal; x <= hVal; x++)
     {
         for(int y = -wVal; y <= wVal; y++)
         {
@@ -50,9 +50,8 @@ Image applyGaussFilter(Image image, int kHeight, int kWidth){
             }
         }
     }
-    
 
-    
+
     unsigned char* new_pixels = (unsigned char*)malloc(newImageHeight*newImageWidth*3);
  
     Image newImage;
@@ -70,3 +69,14 @@ Image applyGaussFilter(Image image, int kHeight, int kWidth){
     return newImage;
 }
 
+int main(){
+    char fileName[100] = "./images/lship.bmp";
+    Image im = ReadImage(fileName);
+    Image newimage = applyGaussFilter(im, 5, 5);
+    
+    WriteImage("./lpl.bmp", newimage);
+    printf("cool\n");
+    return 0;
+}
+
+//gcc gauss.c readwrite.c pixarr.c -o gauss

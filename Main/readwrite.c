@@ -149,13 +149,6 @@ void WriteImage(const char *fileName, Image image){
         fwrite(&importantColors, 4, 1, outputFile);
         
         
-        // if(image.rgb != NULL){
-        //         int j = 0;
-        //         for(j = 0;j<256;j++){
-        //                 fwrite(&(image.rgb)+j, 4, 1, outputFile);
-        //         }
-        //     }
-        //write data
         int i = 0;
         int unpaddedRowSize = image.width*image.bytesPerPixel;
         for ( i = 0; i < image.height; i++)
@@ -169,11 +162,3 @@ void WriteImage(const char *fileName, Image image){
         
 }
 
-/*
-int main(){
-    Image image;
-    image = ReadImage("./lena_2.bmp");
-    printf("\n%d %d %d %d",image.height, image.width, image.xRes, image.yRes);
-    WriteImage("./lenatest.bmp", image);
-}
-*/
